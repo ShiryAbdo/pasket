@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="68" height="68" viewBox="0 0 68 68">
+  <g id="Group_153" data-name="Group 153" transform="translate(-301 -651)">
+    <circle id="Ellipse_68" data-name="Ellipse 68" cx="34" cy="34" r="34" transform="translate(301 651)" fill="#00a780"/>
+    <g id="Group_152" data-name="Group 152">
+      <g id="Mobile_number" data-name="Mobile number" transform="translate(322.264 669.108)">
+        <g id="calculator" transform="translate(0 0)">
+          <g id="Layer_1_66_" transform="translate(0)">
+            <g id="Group_139" data-name="Group 139">
+              <path id="Path_1005" data-name="Path 1005" d="M25.278,0H6.588A1.246,1.246,0,0,0,5.342,1.246V26.166a1.246,1.246,0,0,0,1.246,1.246h18.69a1.246,1.246,0,0,0,1.246-1.246V1.246A1.246,1.246,0,0,0,25.278,0ZM24.031,2.492V6.229H7.834V2.492ZM7.834,24.92V8.721h16.2v16.2H7.834Z" transform="translate(-5.342)" fill="#fff"/>
+              <path id="Path_1006" data-name="Path 1006" d="M14.959,16.844H12.373a.623.623,0,0,0-.623.623v2.588a.623.623,0,0,0,.623.623h2.587a.623.623,0,0,0,.623-.623V17.467A.621.621,0,0,0,14.959,16.844Z" transform="translate(-8.013 -7.02)" fill="#fff"/>
+              <path id="Path_1007" data-name="Path 1007" d="M23.424,16.844H20.838a.623.623,0,0,0-.623.623v2.588a.623.623,0,0,0,.623.623h2.586a.623.623,0,0,0,.623-.623V17.467A.622.622,0,0,0,23.424,16.844Z" transform="translate(-11.541 -7.02)" fill="#fff"/>
+              <path id="Path_1008" data-name="Path 1008" d="M31.889,16.844H29.3a.623.623,0,0,0-.622.623v2.588a.623.623,0,0,0,.622.623h2.587a.623.623,0,0,0,.623-.623V17.467A.622.622,0,0,0,31.889,16.844Z" transform="translate(-15.069 -7.02)" fill="#fff"/>
+              <path id="Path_1009" data-name="Path 1009" d="M14.959,25.555H12.373a.623.623,0,0,0-.623.622v2.588a.623.623,0,0,0,.623.622h2.587a.623.623,0,0,0,.623-.622V26.177A.621.621,0,0,0,14.959,25.555Z" transform="translate(-8.013 -10.651)" fill="#fff"/>
+              <path id="Path_1010" data-name="Path 1010" d="M23.424,25.555H20.838a.623.623,0,0,0-.623.622v2.588a.622.622,0,0,0,.623.622h2.586a.623.623,0,0,0,.623-.622V26.177A.622.622,0,0,0,23.424,25.555Z" transform="translate(-11.541 -10.651)" fill="#fff"/>
+              <path id="Path_1011" data-name="Path 1011" d="M14.959,34.266H12.373a.623.623,0,0,0-.623.622v2.588a.622.622,0,0,0,.623.623h2.587a.623.623,0,0,0,.623-.623V34.888A.621.621,0,0,0,14.959,34.266Z" transform="translate(-8.013 -14.281)" fill="#fff"/>
+              <path id="Path_1012" data-name="Path 1012" d="M23.424,34.266H20.838a.623.623,0,0,0-.623.622v2.588a.622.622,0,0,0,.623.623h2.586a.623.623,0,0,0,.623-.623V34.888A.621.621,0,0,0,23.424,34.266Z" transform="translate(-11.541 -14.281)" fill="#fff"/>
+              <path id="Path_1013" data-name="Path 1013" d="M31.889,25.555H29.3a.622.622,0,0,0-.622.622v7.668a.622.622,0,0,0,.622.623h2.587a.623.623,0,0,0,.623-.623V26.177A.622.622,0,0,0,31.889,25.555Z" transform="translate(-15.069 -10.651)" fill="#fff"/>
+            </g>
+          </g>
+        </g>
+      </g>
+      <text id="_" data-name="+" transform="translate(338 710)" fill="#fff" font-size="25" font-family="SegoeUI-Bold, Segoe UI" font-weight="700"><tspan x="0" y="0">+</tspan></text>
+    </g>
+  </g>
+</svg>
