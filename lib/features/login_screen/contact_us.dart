@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:plstka_app/features/settings/app_colors.dart';
 
 class ContactUs extends StatefulWidget {
@@ -50,11 +51,14 @@ class _ContactUsState extends State<ContactUs> {
               onPressed: () {
                 showDialogCall(context);
               },
-              icon: Image.asset(
-                "assets/icons/phone.png",
-                // height: 20,
-                // width: 20,
+              icon: SvgPicture.asset(
+                'assets/icons/phone.svg',
               ),
+              //  Image.asset(
+              //   "assets/icons/phone.png",
+              //   // height: 20,
+              //   // width: 20,
+              // ),
             ),
           ),
         ],

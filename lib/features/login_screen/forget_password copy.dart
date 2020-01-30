@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:plstka_app/features/settings/app_colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'new_password.dart';
+import '../update_password/new_password.dart';
 
 class ForgetPassword extends StatefulWidget {
   @override

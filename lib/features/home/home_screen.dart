@@ -1,16 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:plstka_app/data/model/generalmodels/drawer_item.dart';
 import 'package:plstka_app/features/change_language/change_language_screen.dart';
-import 'package:plstka_app/features/contactus/contactus_view.dart';
-import 'package:plstka_app/features/home/scanner_screen.dart';
 import 'package:plstka_app/features/login_screen/login_screen_view.dart';
 import 'package:plstka_app/features/profilescreen/profilescreen_view.dart';
+import 'package:plstka_app/features/scanview/scanViewDemo.dart';
 import 'package:plstka_app/features/settings/app_colors.dart';
 import 'package:plstka_app/features/settings/settings_option.dart';
 import 'package:plstka_app/trans/translations.dart';
-
-import '../../scanViewDemo.dart';
 import 'drawer_demo.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -64,9 +63,41 @@ class _HomeScreenState extends State<HomeScreen>
 
   bool _checkConfiguration() => true;
   String barcode = "";
+  _asyncMethod() async {
+    Map<PermissionGroup, PermissionStatus> permissions =
+        await PermissionHandler().requestPermissions([PermissionGroup.camera]);
+    print(permissions);
+    if (permissions[PermissionGroup.camera] != PermissionStatus.granted) {
+      showCupertinoDialog(
+        context: context,
+        builder: (context) {
+          return CupertinoAlertDialog(
+            title: Text("Opps"),
+            content: Text("you will not able to scane code :("),
+            actions: <Widget>[
+              CupertinoDialogAction(
+                child: Text(
+                  "Ok",
+                  style: const TextStyle(
+                      color: AppColors.PRIMARY_COLOR,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: "GESSTextMedium",
+                      fontStyle: FontStyle.normal,
+                      fontSize: 18.3),
+                ),
+                onPressed: () => Navigator.pop(context),
+              )
+            ],
+          );
+        },
+      );
+    }
+  }
 
+  @override
   void initState() {
     super.initState();
+    _asyncMethod();
     _pageController = new PageController();
     controller =
         AnimationController(duration: Duration(milliseconds: 900), vsync: this);
@@ -238,19 +269,22 @@ class _HomeScreenState extends State<HomeScreen>
                       fontStyle: FontStyle.normal,
                       fontSize: 18.3),
                   textAlign: TextAlign.right)),
-          actions: <Widget>[
-            Container(
-              margin: EdgeInsets.only(left: 10),
-              child: IconButton(
-                onPressed: () {},
-                icon: Image.asset(
-                  "assets/icons/pencil.png",
-                  // height: 20,
-                  // width: 20,
-                ),
-              ),
-            ),
-          ],
+          // actions: <Widget>[
+          //   Container(
+          //     margin: EdgeInsets.only(left: 10),
+          //     child: IconButton(
+          //       onPressed: () {},
+          //       icon: SvgPicture.asset(
+          //         'assets/icons/pencil.svg',
+          //       ),
+          //       // Image.asset(
+          //       //   "assets/icons/pencil.png",
+          //       //   // height: 20,
+          //       //   // width: 20,
+          //       // ),
+          //     ),
+          //   ),
+          // ],
         ),
         drawer: Theme(
             data: Theme.of(context).copyWith(
@@ -300,7 +334,7 @@ class _HomeScreenState extends State<HomeScreen>
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              ScanViewDemo()));
+                                              ScanViewView()));
 
                                   // Navigator.push(
                                   //   context,

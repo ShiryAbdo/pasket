@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:plstka_app/features/settings/app_colors.dart';
 
 class CangeLanguageScreen extends StatefulWidget {
@@ -7,6 +8,7 @@ class CangeLanguageScreen extends StatefulWidget {
 }
 
 class _CangeLanguageScreenState extends State<CangeLanguageScreen> {
+  final String assetName = 'assets/images/logo.svg';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,10 +37,13 @@ class _CangeLanguageScreenState extends State<CangeLanguageScreen> {
                 shrinkWrap: true,
                 children: [
                   Container(
-                    child: Image.asset(
-                      "assets/images/logo.png",
-                      height: 200,
+                    child: new SvgPicture.asset(
+                      assetName,
                     ),
+                    // Image.asset(
+                    //   "assets/images/logo.png",
+                    //   height: 200,
+                    // ),
                   ),
                   SizedBox(
                     height: 20.0,

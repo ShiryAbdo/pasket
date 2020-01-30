@@ -52,7 +52,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
           child: ClipPath(
         child: Container(
           width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.width / 5,
+          height: 100,
           color: AppColors.PRIMARY_COLOR,
         ),
         clipper: CustomClipperexample(),

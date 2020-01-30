@@ -15,7 +15,7 @@ class _IntroScreenState extends State<IntroScreen> {
   List imgList = [
     "assets/images/entro1.png",
     "assets/images/entro2.png",
-    "assets/images/entro3.png"
+    "assets/images/slider_three.png"
   ];
 
   List title = [

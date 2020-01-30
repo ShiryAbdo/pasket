@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:plstka_app/data/db/Preference.dart';
+import 'package:plstka_app/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'model/LoginModel/loginmodel_data.dart';
 
@@ -21,7 +22,7 @@ class NetworkCommon {
       final dynamic jsonBody = d.data;
 
       final statusCode = d.statusCode;
-      print("statusCode  " + statusCode.toString());
+      // print("statusCode  " + statusCode.toString());
 
       if (statusCode < 200 || statusCode >= 300 || jsonBody == null) {
         throw new Exception("statusCode: $statusCode");
@@ -45,17 +46,18 @@ class NetworkCommon {
     dio.options.connectTimeout = 50000; //5s
     dio.options.receiveTimeout = 30000;
     dio.options.followRedirects = false;
+    dio.interceptors.add(alice.getDioInterceptor());
     dio.interceptors
         .add(InterceptorsWrapper(onRequest: (RequestOptions options) async {
       /// Do something before request is sent
       /// set the token
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      String token = prefs.getString('token');
-      if (token != null) {
-        options.headers["Authorization"] = "Bearer " + token;
-      }
+//      SharedPreferences prefs = await SharedPreferences.getInstance();
+//      String token = prefs.getString('token');
+//      if (token != null) {
+//        options.headers["Authorization"] = "Bearer " + token;
+//      }
 
-//      print("Pre request:${options.method},${options.baseUrl}${options.path}");
+      print("Pre_request:${options.method},${options.baseUrl}${options.path}");
 //      print("Pre request:${options.headers.toString()}");
 
       return options; //continue
@@ -70,12 +72,19 @@ class NetworkCommon {
 
           var user = LoginModel.fromJson(jsonData);
           if (user.status) {
-            print("accessToken   " + user.data.accessToken.toString());
-            SharedPreferences prefs = await SharedPreferences.getInstance();
-            prefs.setString("user_data", response.toString());
-            prefs.setBool("CheckLogin", true);
+//            print("accessToken   " + user.data.accessToken.toString());
+//            SharedPreferences prefs = await SharedPreferences.getInstance();
+//            prefs.setString("user_data", response.toString());
+//            prefs.setBool("CheckLogin", true);
+//            print("response   " + response.toString());
 
-            print("response   " + response.toString());
+          final SharedPreferences prefs = await SharedPreferences.getInstance();
+           final JsonDecoder _decoder = new JsonDecoder();
+           final JsonEncoder _encoder = new JsonEncoder();
+           final resultContainer = _decoder.convert(response.toString());
+           prefs.setString("accessToken", resultContainer["accessToken"]);
+           prefs.setString("user", _encoder.convert((resultContainer as Map)));
+           prefs.setBool("CheckLogin", true);
           }
         }
       } else if (statusCode == 401) {
@@ -110,7 +119,8 @@ class NetworkCommon {
 //      print("Response From:${response.toString()}");
       return response; // continue
     }, onError: (DioError e) {
-      print("DioError_shimaa " + e.toString());
+      print("shimoooooooooooooooooooo");
+      print("DioError_shimaa" + e.toString());
 
       // Do something with response error
       return e; //continue
@@ -118,3 +128,78 @@ class NetworkCommon {
     return dio;
   }
 }
+
+// import 'dart:convert';
+// import 'package:dio/dio.dart';
+// import 'package:plstka_app/data/db/Preference.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
+// import '../main.dart';
+// import 'model/LoginModel/loginmodel_data.dart';
+// // import 'main.dart';
+
+// class NetworkCommon {
+//   static final NetworkCommon _singleton = new NetworkCommon._internal();
+
+//   factory NetworkCommon() {
+//     return _singleton;
+//   }
+
+//   NetworkCommon._internal();
+
+//   final JsonDecoder _decoder = new JsonDecoder();
+//   dynamic decodeResp(d) {
+//     if (d is Response) {
+//       final dynamic jsonBody = d.data;
+//       final statusCode = d.statusCode;
+//       print("statusCode  " + statusCode.toString());
+
+//       if (statusCode < 200 || statusCode >= 300 || jsonBody == null) {
+//         throw new Exception("statusCode: $statusCode");
+//       }
+
+//       if (jsonBody is String) {
+//         return _decoder.convert(jsonBody);
+//       } else {
+//         return jsonBody;
+//       }
+//     } else {
+//       throw d;
+//     }
+//   }
+
+//   Dio get dio {
+//     Dio dio = new Dio();
+//     dio.options.baseUrl = 'http://plstka.com/api/auth/';
+//     dio.options.connectTimeout = 50000; //5s
+//     dio.options.receiveTimeout = 30000;
+//     dio.options.followRedirects = false;
+//     dio.interceptors.add(alice.getDioInterceptor());
+//     dio.interceptors
+//         .add(InterceptorsWrapper(onRequest: (RequestOptions options) async {
+//       SharedPreferences prefs = await SharedPreferences.getInstance();
+//       String token = prefs.getString('token');
+//       if (token != null) {
+//         options.headers["Authorization"] = "Bearer " + token;
+//       }
+//       return options; //continue
+//     }, onResponse: (Response response) async {
+//       print("response  " + response.toString());
+//       final int statusCode = response.statusCode;
+//       if (statusCode >= 200 || statusCode < 300) {
+//         if (response.request.path == "login") {
+//           final SharedPreferences prefs = await SharedPreferences.getInstance();
+//           final JsonDecoder _decoder = new JsonDecoder();
+//           final JsonEncoder _encoder = new JsonEncoder();
+//           final resultContainer = _decoder.convert(response.toString());
+//           prefs.setString("accessToken", resultContainer["accessToken"]);
+//           prefs.setString("user", _encoder.convert((resultContainer as Map)));
+//           prefs.setBool("CheckLogin", true);
+//         }
+//       }
+//     }, onError: (DioError e) {
+//       print("DioError_shimaa" + e.toString());
+//       return e;
+//     }));
+//     return dio;
+//   }
+// }

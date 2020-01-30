@@ -1,7 +1,14 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:plstka_app/features/login_screen/change_password.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:plstka_app/data/db/Preference.dart';
+import 'package:plstka_app/data/model/LoginModel/loginmodel_data.dart';
+import 'package:plstka_app/features/update_password/change_password.dart';
 import 'package:plstka_app/features/settings/app_colors.dart';
+import 'package:plstka_app/utils/StringValidator/validator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -11,14 +18,61 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   final _textController = TextEditingController();
 
-  String _userName = "";
-  String _password = "";
-  FocusNode _focusUserName = FocusNode();
-  FocusNode _focusPassword = FocusNode();
+  String nameUser = "";
+  String poneUser ="" ;
+  String cityUser = "" ;
+  String adressUser ="";
+  String imageUser ="";
+   FocusNode _focusUserName = FocusNode();
+  FocusNode _focusponeUser = FocusNode();
+  FocusNode _focuscityUser = FocusNode();
+  FocusNode _focusadressUser = FocusNode();
   bool _isEnabled = false;
+  @override
+  void initState() {
+    super.initState();
+    var urlPattern = r"(https?|http)://([-A-Z0-9.]+)(/[-A-Z0-9+&@#/%=~_|!:,.;]*)?(\?[A-Z0-9+&@#/%=~_|!:‌​,.;]*)?";
+    var match = new RegExp(urlPattern, caseSensitive: false).firstMatch('https://www.google.com');
+    match = RegExp(urlPattern, caseSensitive: false).firstMatch('http://www.google.com');
+    Preference.load();
+    SharedPreferences.getInstance().then((SharedPreferences sp) {
+      String userData = sp.getString('user');
+      Map valueMap = json.decode(userData);
+      var user = LoginModel.fromJson(valueMap);
+      nameUser = user.data.info.name;
+      poneUser= user.data.info.phone;
+      cityUser =user.data.info.city;
+      adressUser = user.data.info.address;
+      imageUser = user.data.info.avatar;
+      bool isValid = isURL(imageUser); // false
+
+      setState(() {});
+    });
+    getData();
+  }
+
+  getData()async {
+    SharedPreferences prefs =
+    await SharedPreferences.getInstance();
+    String userData = prefs.getString('user');
+    Map valueMap = json.decode(userData);
+    var user = LoginModel.fromJson(valueMap);
+    nameUser = user.data.info.name;
+    poneUser= user.data.info.phone;
+    cityUser =user.data.info.city;
+    adressUser = user.data.info.address;
+    imageUser = user.data.info.avatar;
+    print("nameUser"+nameUser +"");
+    print("cityUser"+cityUser+"");
+    print("adressUser"+adressUser+"");
+    print("imageUser"+imageUser+"");
+
+
+  }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -37,11 +91,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
             margin: EdgeInsets.only(left: 10),
             child: IconButton(
               onPressed: () => setState(() => _isEnabled = !_isEnabled),
-              icon: Image.asset(
-                "assets/icons/pencil.png",
-                // height: 20,
-                // width: 20,
+              icon: SvgPicture.asset(
+                'assets/icons/pencil.svg',
               ),
+              // icon: Image.asset(
+              //   "assets/icons/pencil.png",
+              //   // height: 20,
+              //   // width: 20,
+              // ),
             ),
           ),
         ],
@@ -96,18 +153,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Container(
                             margin: EdgeInsets.only(top: 5),
                             child: ClipOval(
-                              child: Image(
-                                  image: new AssetImage(
-                                      "assets/images/profile.png"),
-                                  height: 140,
-                                  width: 140,
-                                  fit: BoxFit.fill),
-                              //    Image.network(
-                              // "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-                              // width: 140,
-                              // height: 140,
-                              // fit: BoxFit.cover,
-                              // )
+                              child:
+//                              Image(
+//                                  image:
+//                                  new AssetImage(
+//                                      "assets/images/profile_image.png"),
+//                                  height: 140,
+//                                  width: 140,
+//                                  fit: BoxFit.fill),
+                                  Image.network(
+                                    isURL(imageUser)? imageUser:"",
+//                               "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+                               width: 140,
+                               height: 140,
+                               fit: BoxFit.cover,
+                               )
                             )),
                         // ClipOval(
                         //     child: Image.network(
@@ -154,7 +214,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             TextField(
               enabled: _isEnabled,
               maxLines: 1,
-              onChanged: (name) => _userName = name,
+              onChanged: (name) => nameUser = name,
               style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.w500,
@@ -168,7 +228,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   color: Colors.grey[900],
                 ),
                 hintText: "Enter your name ",
-                labelText: "Shimaa Abdo",
+                labelText: nameUser,
                 labelStyle: const TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.w500,
@@ -187,21 +247,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
             TextField(
               enabled: _isEnabled,
               maxLines: 1,
-              onChanged: (name) => _userName = name,
+              onChanged: (name) => poneUser = name,
               style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.w500,
                   fontFamily: "GESSTextMedium",
                   fontStyle: FontStyle.normal,
                   fontSize: 15.7),
-              focusNode: _focusUserName,
+              focusNode: _focusponeUser,
               decoration: new InputDecoration(
                 prefixIcon: Icon(
                   Icons.phone_android,
                   color: Colors.grey[900],
                 ),
                 hintText: "Enter your Mobile number ",
-                labelText: "01210387863",
+                labelText: poneUser,
                 labelStyle: const TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.w500,
@@ -220,21 +280,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
             TextField(
               enabled: _isEnabled,
               maxLines: 1,
-              onChanged: (name) => _userName = name,
+              onChanged: (name) => cityUser = name,
               style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.w500,
                   fontFamily: "GESSTextMedium",
                   fontStyle: FontStyle.normal,
                   fontSize: 15.7),
-              focusNode: _focusUserName,
+              focusNode: _focuscityUser,
               decoration: new InputDecoration(
                 prefixIcon: Icon(
                   Icons.location_city,
                   color: Colors.grey[900],
                 ),
                 hintText: "Enter your City   ",
-                labelText: "Tanta",
+                labelText: cityUser,
                 labelStyle: const TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.w500,
@@ -253,21 +313,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
             TextField(
               enabled: _isEnabled,
               maxLines: 1,
-              onChanged: (name) => _userName = name,
+              onChanged: (name) => adressUser = name,
               style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.w500,
                   fontFamily: "GESSTextMedium",
                   fontStyle: FontStyle.normal,
                   fontSize: 15.7),
-              focusNode: _focusUserName,
+              focusNode: _focusadressUser,
               decoration: new InputDecoration(
                 prefixIcon: Icon(
                   Icons.location_on,
                   color: Colors.grey[900],
                 ),
                 hintText: "Enter your Adress ",
-                labelText: "Cairo ,tanta",
+                labelText: adressUser,
                 labelStyle: const TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.w500,

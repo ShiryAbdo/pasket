@@ -8,15 +8,24 @@ class LoginModelRepository {
 
   Future<Map> loginNormaly(String empho, String pass) {
     FormData formData = new FormData.from({
-
       "phone": empho,
       "password": pass,
-
-     });
+    });
 //    var _dio = NetworkCommon().dio;
 //    _dio.options.headers= {"Authorization" : token};
 
-    return new NetworkCommon().dio.post("login", data: formData).then((d) {
+    return new NetworkCommon()
+        .dio
+        .post(
+          "login",
+          data: formData,
+          // options: Options(
+          //     followRedirects: false,
+          //     validateStatus: (status) {
+          //       return status > 400;
+          //     }),
+        )
+        .then((d) {
       var results = new NetworkCommon().decodeResp(d);
       Preference.load();
 //      Preference.setString("device_id", udid);

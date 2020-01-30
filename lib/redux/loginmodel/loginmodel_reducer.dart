@@ -8,6 +8,7 @@ final loginmodelReducer = combineReducers<LoginModelState>([
   // TypedReducer<LoginModelState, ClearDataAction>(_clearData),
 ]);
 
+
 LoginModelState _loginmodelStatus(
     LoginModelState state, DataLoginStatusAction action) {
   var status = state.status ?? Map();

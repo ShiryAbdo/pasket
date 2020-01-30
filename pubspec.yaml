@@ -42,7 +42,10 @@ dependencies:
   permission_handler: '^3.0.0'
   fast_qr_reader_view: ^0.1.5
   flutter_qr_reader: ^1.0.2
-
+  alice: ^0.0.4
+  intl: ">=0.14.0"
+  connectivity: ^0.4.5+6
+  string_validator: ^0.1.3
 
 
 dev_dependencies:
@@ -74,11 +77,22 @@ flutter:
   - assets/images/women_star.svg
   - assets/images/password.svg
   - assets/images/home_bacground.svg
+  - assets/images/home_bacground.png
   - assets/images/forgetpassword.svg
   - assets/images/profile.svg
+  - assets/images/profile_image.png
   - assets/images/entro1.png
   - assets/images/entro2.png
   - assets/images/entro3.png
+  - assets/images/forgetpassword.png
+  - assets/images/women_star.png
+  - assets/images/gairl.png
+  - assets/images/mask.png
+  - assets/images/password.png
+  - assets/images/cancel.png
+  - assets/images/slider_three.png
+  - assets/images/call_star.png
+  - assets/icons/delete.png
   - assets/icons/logo_pastka.svg
   - assets/icons/language.svg
   - assets/icons/contact_us.svg
@@ -88,7 +102,8 @@ flutter:
   - assets/icons/out.svg
   - assets/icons/profile.svg
   - assets/icons/pencil.svg
-     
+  - assets/icons/calc_add.svg
+      
    
   - locale/i18n_en.json
   - locale/i18n_zh.json
@@ -108,9 +123,9 @@ flutter:
      - family:  Entro1
        fonts:
          - asset: fonts/Entro1.ttf
-     - family:  Entro1
+     - family:  Home_bacground
        fonts:
-         - asset: fonts/Entro1.ttf
+         - asset: fonts/Home_bacground.ttf
 
   # fonts:
   #   - family: Schyler

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart' show DragStartBehavior;
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:plstka_app/features/login_screen/change_language_screen.dart';
 import 'package:plstka_app/features/login_screen/contact_us.dart';
 import 'package:plstka_app/features/login_screen/profile_screen.dart';
@@ -89,10 +90,10 @@ class _DrawerDemoState extends State<DrawerDemo> with TickerProviderStateMixin {
                 margin: EdgeInsets.only(top: 5),
                 child: ClipOval(
                   child: Image(
-                      image: new AssetImage("assets/images/profile.png"),
+                      image: new AssetImage("assets/images/profile_image.png"),
                       height: 140,
                       width: 140,
-                      fit: BoxFit.fill),
+                      fit: BoxFit.fitHeight),
                   //    Image.network(
                   // "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
                   // width: 140,
@@ -129,17 +130,25 @@ class _DrawerDemoState extends State<DrawerDemo> with TickerProviderStateMixin {
                                   },
                                   child: Row(
                                     children: <Widget>[
-                                      ConstrainedBox(
-                                        constraints: BoxConstraints(
-                                          minWidth: 80,
-                                          minHeight: 30,
-                                          maxWidth: 100,
-                                          maxHeight: 50,
-                                        ),
-                                        child: Image.asset(
-                                            "assets/icons/profile.png",
-                                            fit: BoxFit.cover),
-                                      ),
+                                      // ConstrainedBox(
+                                      //   constraints: BoxConstraints(
+                                      //     minWidth: 80,
+                                      //     minHeight: 30,
+                                      //     maxWidth: 100,
+                                      //     maxHeight: 50,
+                                      //   ),
+                                      //   child:
+                                      Container(
+                                          // color: Colors.amber,
+                                          child: SvgPicture.asset(
+                                        'assets/icons/profile.svg',
+                                        width: 70,
+                                        fit: BoxFit.fill,
+                                      )),
+                                      // Image.asset(
+                                      //     "assets/icons/profile.png",
+                                      //     fit: BoxFit.cover),
+                                      // ),
                                       SizedBox(width: 10),
                                       Text(
                                         'Profil',
@@ -163,17 +172,27 @@ class _DrawerDemoState extends State<DrawerDemo> with TickerProviderStateMixin {
                                   },
                                   child: Row(
                                     children: <Widget>[
-                                      ConstrainedBox(
-                                        constraints: BoxConstraints(
-                                          minWidth: 80,
-                                          minHeight: 30,
-                                          maxWidth: 100,
-                                          maxHeight: 50,
-                                        ),
-                                        child: Image.asset(
-                                            "assets/icons/contact_us.png",
-                                            fit: BoxFit.cover),
-                                      ),
+                                      Container(
+                                          // color: Colors.amber,
+                                          child: SvgPicture.asset(
+                                        'assets/icons/contact_us.svg',
+                                        width: 70,
+                                        fit: BoxFit.fill,
+                                      )),
+                                      // ConstrainedBox(
+                                      //   constraints: BoxConstraints(
+                                      //     minWidth: 80,
+                                      //     minHeight: 30,
+                                      //     maxWidth: 100,
+                                      //     maxHeight: 50,
+                                      //   ),
+                                      //   child: SvgPicture.asset(
+                                      //     'assets/icons/contact_us.svg',
+                                      //   ),
+                                      //   //  Image.asset(
+                                      //   //     "assets/icons/contact_us.png",
+                                      //   //     fit: BoxFit.cover),
+                                      // ),
                                       SizedBox(width: 10),
                                       Text(
                                         'Contact us',
@@ -197,17 +216,27 @@ class _DrawerDemoState extends State<DrawerDemo> with TickerProviderStateMixin {
                                   },
                                   child: Row(
                                     children: <Widget>[
-                                      ConstrainedBox(
-                                        constraints: BoxConstraints(
-                                          minWidth: 80,
-                                          minHeight: 30,
-                                          maxWidth: 100,
-                                          maxHeight: 50,
-                                        ),
-                                        child: Image.asset(
-                                            "assets/icons/language.png",
-                                            fit: BoxFit.cover),
-                                      ),
+                                      Container(
+                                          // color: Colors.amber,
+                                          child: SvgPicture.asset(
+                                        'assets/icons/language.svg',
+                                        width: 70,
+                                        fit: BoxFit.fill,
+                                      )),
+                                      // ConstrainedBox(
+                                      //   constraints: BoxConstraints(
+                                      //     minWidth: 80,
+                                      //     minHeight: 30,
+                                      //     maxWidth: 100,
+                                      //     maxHeight: 50,
+                                      //   ),
+                                      //   child: SvgPicture.asset(
+                                      //     'assets/icons/language.svg',
+                                      //   ),
+                                      //   //  Image.asset(
+                                      //   //     "assets/icons/language.png",
+                                      //   //     fit: BoxFit.cover),
+                                      // ),
                                       SizedBox(width: 10),
                                       Text(
                                         "Change language",
@@ -231,17 +260,27 @@ class _DrawerDemoState extends State<DrawerDemo> with TickerProviderStateMixin {
                                   },
                                   child: Row(
                                     children: <Widget>[
-                                      ConstrainedBox(
-                                        constraints: BoxConstraints(
-                                          minWidth: 80,
-                                          minHeight: 30,
-                                          maxWidth: 100,
-                                          maxHeight: 50,
-                                        ),
-                                        child: Image.asset(
-                                            "assets/icons/out.png",
-                                            fit: BoxFit.cover),
-                                      ),
+                                      Container(
+                                          // color: Colors.amber,
+                                          child: SvgPicture.asset(
+                                        'assets/icons/out.svg',
+                                        width: 70,
+                                        fit: BoxFit.fill,
+                                      )),
+                                      // ConstrainedBox(
+                                      //   constraints: BoxConstraints(
+                                      //     minWidth: 80,
+                                      //     minHeight: 30,
+                                      //     maxWidth: 100,
+                                      //     maxHeight: 50,
+                                      //   ),
+                                      //   child: SvgPicture.asset(
+                                      //     'assets/icons/out.svg',
+                                      //   ),
+                                      //   // Image.asset(
+                                      //   //     "assets/icons/out.png",
+                                      //   //     fit: BoxFit.cover),
+                                      // ),
                                       SizedBox(width: 10),
                                       Text(
                                         "Sign out",

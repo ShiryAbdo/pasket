@@ -1,43 +1,42 @@
 import 'dart:convert';
 import 'package:intl/intl.dart';
-import 'package:plstka_app/data/model/LoginModel/data_data.dart';
-import 'package:sqflite/sqflite.dart';
+import 'package:plstka_app/data/model/updatepasswordmodel/data_data.dart';
 
-class LoginModel {
-  LoginData data;
+class UpdatePassword {
+  Data data;
   int count;
   String message;
   bool status;
 
-  LoginModel({
+  UpdatePassword({
     this.data,
     this.count = 0,
     this.message = "",
     this.status = false,
   });
 
-  LoginModel.fromJson(Map<String, dynamic>  map) :
+  UpdatePassword.fromJson(Map<String, dynamic>  map) :
         data = map['data'] == null
             ? null
-            : LoginData.fromJson(map['data']),
+            : Data.fromJson(map['data']),
         count = map['count']  ?? 0,
         message = map['message']  ?? "",
         status = map['status']  ?? false;
 
   Map<String, dynamic> toJson() => {
-    'data': data.toJson(),
-    'count': count,
-    'message': message,
-    'status': status,
-  };
+        'data': data.toJson(),
+        'count': count,
+        'message': message,
+        'status': status,
+      };
 
-  LoginModel copyWith({
-    LoginData data,
+  UpdatePassword copyWith({
+    Data data,
     int count,
     String message,
     bool status,
   }) {
-    return LoginModel(
+    return UpdatePassword(
       data: data ?? this.data,
       count: count ?? this.count,
       message: message ?? this.message,
